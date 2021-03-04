@@ -1,0 +1,374 @@
+Linix notes
+======================================================================= 
+	directory shortcuts
+
+. curent directory 
+.. parent 
+cd - takes you to presvious directory we were in 
+========================================================================
+	How to excecure commands outside od $PATH
+
+/full/path/to/command
+./command-in-this-dir
+==========================================================================
+	How to create and remove directories
+
+mkdir [-p]  directory -create a directory   |example|  mkdir -p dir1/dir2/dir3
+rmdir [-p]  directory -remove a directory
+rm -rf directory -Recursively removes directory 
+===========================================================================
+	Decoding ls -l output
+
+$ls -l
+-rw-rw-r--1 jonathan users 10400 Feb 05 08:52 sales.data
+
+Permissions		-rw-rw-r--
+Number od links		1
+owner name		jonathan 
+Group name		users
+number of bytes		10400 
+in the file
+last modification 	Feb 05 08:52
+File name		sales.data
+=============================================================================
+	Listing All Files, Including Hidden Files
+
+hidden files begin with a period
+	somwtimes called "dot files"
+hideen files are not displayed by default
+to show hidden files with ls, use ls -a
+command options can be combined 
+	ls -l -a is the same as ls -la or ls -al
+=============================================================================
+	Listing Files by type
+use ls -F to reveal file types
+	/ directory
+	@ Link
+	* executable
+
+
+=============================================================================
+	list files by time and in reverse and recursively 
+ls -t		by time
+ls -r		reverse
+ls -latr	long listing incluses all files reversed sorted by time
+ls -R		list files recusively (cureent and sub directories)
+=============================================================================
+	Tree command
+simular to ls -R but create visual output
+tree
+tree -d		list directories only
+tree -C		colorize output  | or ls --color
+
+list file with color
+ls --color
+=============================================================================
+	open files that have spaces in the file name
+
+"put the name in quotes"
+=============================================================================
+	Permissions
+
+$ls -l
+-rw-rw-r--1 jonathan users 10400 Feb 05 08:52 sales.data
+
+Symbol			type
+-			regular file
+d			Directory
+l			symbolic link
+r			Read
+w			Write
+x			Execute
+
+=============================================================================
+	Permissions files vs directories
+
+Permission		file				directory
+Read(r)			allows a file to be read	allows file names in the directory to be read
+
+Write(w)		Allows a file to modifed 	allows entires to be modified within the directory 
+
+Execute(x)		allows the exc od a file	allows access to conents and metadata for entw
+=============================================================================
+	Permission Categories
+
+symbol		category
+u		User
+g		Group
+o		Other
+a		All
+=============================================================================
+	This is the order that permissions are listed always
+-rw-r--r-- 1 bob users 10400 Sep 27 08:52 sales.data
+
+Type,User,Group,Other
+-,rw-,r--,r--
+=============================================================================
+	Changing Permissions 
+
+item			meaning
+====			=======
+chmod			Change mode command
+
+ugoa			User category 
+			user group, other, all
+
++-=			Add, sub, or set permissions
+
+rwx			Read, Write, Execute			
+=============================================================================
+example
+ls -l sales.data
+-rw-r--r--. 1 bob bob 10400 Sep 27 08:52 sales.data
+
+chmod g+w sales.data
+ls -l sales.data
+-rw-rw--r--. 1 bob bob 10400 Sep 27 08:52 sales.data
+
+
+chmod g-w sales.data
+ls -l sales.data
+-rw-r--r--. 1 bob bob 10400 Sep 27 08:52 sales.data
+
+
+chmod g+wx sales.data
+ls -l sales.data
+-rw-rwxr--r--. 1 bob bob 10400 Sep 27 08:52 sales.data
+
+
+chmod u+rwx,g-x sales.data
+ls -l sales.data
+-rwxrwr--. 1 bob bob 10400 Sep 27 08:52 sales.data
+
+
+chmod a=r sales.data
+ls -l sales.data
+-r--r--r--. 1 bob bob 10400 Sep 27 08:52 sales.data
+=============================================================================
+	Numeric Based Permisions (read write execute)
+
+r		w		x
+=		=		=
+0		0		0	Value for off
+
+1		1		1	Binary value for on
+
+4		2		1	Base 10 value for on
+=============================================================================
+	Order has meaning (user, group, other)
+
+		U		G		O
+		=		=		=
+Symbolic	rwx		r-x		r--
+
+binary		111		101		100
+
+Decimal		7		5		4
+=============================================================================
+	commononly used permissions
+
+Symbolic		Octal		tranlation
+========		=====		==========
+-rwx------		700		Read, write, exucute 
+-rwxr-xr-x		755		everyone on the system to exucute the file, only th owner can edit the file
+-rw-rw-r--		664		group of people can modify the file, lets others read it 
+-rw-rw----		660		group can modify file but not let other read it 
+-rw-r--r--		644		allows everyone on the system to read the file, only owner can edit it 
+			777		gives everyone full access
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=============================================================================
+		TCP/IP
+TCP/IP
+	used for network communications
+	TCP = tranmission control protocol
+	IP = internet Protocol
+TCP - controls data exchange
+Ip - sends data from one device to another
+Hosts
+	devices on a network that have an IP adress
+=============================================================================
+		IP Network
+Ip adress
+	Example: 199.83.131.186
+subnetMask
+	Example: 255.255.255.0
+broadcast address
+	example: 199.83.131.255
+octet.octet.octet
+	octet values can be from 0 to 255
+
+network adress
+host adress
+each must be unique for proper routing
+address classes
+	used to determin the network adress and host adress
+==============================================================================
+		classful networks
+
+class		network			host allowed
+=====		=======			============
+A		1.0 -> 127.0		16,777,216
+		ex: 17.24.88.9
+
+B		128.0-> 191.255		65,536
+		ex: 183.194.46.31
+
+C		192.0.0->233.255.255	255
+		ex: 199.83.131.186
+==============================================================================
+		Subnet Mask
+
+class			subnet Mask		
+=====			===========
+A			255.0.0.0   (255 is the network portion, the 0.0.0 is the host portion)
+
+B			255.255.0.0	(255.255 is for network adresses, while the 0.0 are for host adresses)
+
+C			255.255.255.0	(first 3 for network, last for host)
+
+[255][255][_0][_0]
+[183][194][46][31] 
+
+183.194.46.31 is a class B network, its between  128.0 and 191.255.0 and 
+the network portion is 183.194 host portion is 46.31
+==============================================================================
+		Broadcast adresses
+
+Class		Network		Subnetmask		Broadcast
+A		17.0.0.0	255.0.0.0		17.255.255.255
+
+B		183.194.0.0	255.255.0.0		183.194.255.255
+
+C		199.83.131.0	255.255.255.0		199.83.131.255
+================================================================================
+			Classless Intre=Domain Routing / CIDR
+IP 121.67.198.94
+	class A network 	121.0.0.0
+	class A subnet: 	255.0.0.0
+	class A broadcast: 	121.255.255.255
+
+IP: 121.37.198.94 subnet 255.255.255.0
+	CIDR network: 121.67.198.0
+	CIDR subnet: 255.255.255.0
+	CIDR broadcast: 121.67.198.255
+
+
+==============================================================================
+		Reserved Private Adress space
+
+class		Range				private adress space
+A		1.0.0.0 - 127.255.255.255	10.0.0.0 - 10.255.255.255
+
+B		128.0.0.0 - 191.255.255.255	172.16.0.0 - 172.31.255.255
+
+C		192.0.0.0 - 233.255.255.255	192.168.0.0 - 192.168.255.255
+==============================================================================
+		Determining your IP adress
+ip adress
+ip addr
+ip a
+ip address show |or| ip a s
+
+ifconfig  //depricated but probably still works
+==============================================================================
+		DNS hostname  (Domain name system)
+
+FQDN = fully qualified domain name
+	webprod01.mycompany.com
+TLD (top level domain)
+	.com, .net, .org, etc...
+Domains
+	below(to the left of) TLD
+sub-domain
+	below(to the left of) the domain
+	webprod01.ny.us.mycopany.com
+	
+==============================================================================
+		Displaying the host name
+$hostname
+webprod01
+
+$uname -n
+webprod01
+
+$hostname -f
+webprod01.mycompany.com
+
+setting the hostname
+
+# hostname webprod01
+
+# echo 'webprod01' > /ect/hostname
+
+# vi /ect/sysconfig/network
+	HOSTNAME=webprod01 
+==============================================================================
+		Resolving DNS names
+host
+dig
+
+$ host www.mycompany.com
+webprod01.mycompany.com has adress 1.2.1.6
+
+$ host 1.2.1.6
+
+6.1.2.1.in-addr.arpa domain name pointer
+www.mycompany.com
+==============================================================================
+		Th/ect/host file
+
+Format:
+	IP FQDN alias(es)
+	10.11.12.13 webprod02.mycorp.com webprod02
+Now you can refer to te host by name
+	 webprod02.mycorp.com Or webprod02
+ect/hosts is local to your linux system. it does not propagate to the rest of the network
+
+sample ect/host file
+
+127.0.0.1	localhost
+1.2.1.6		webprod01.mycorp.com webprod01
+10.11.12.14	webprod02.mycorp.com webprod02
+10.11.12.15	webprod03.mycorp.com webprod03
+10.11.13.7	dbcluster
+==============================================================================
+		ect/nsswitch.conf
+NSS = name service switch
+controlls the search order for resolutions
+
+hosts: files dns
+
+hosts: files nis dns
+==============================================================================
+		Network Ports
+when a service statrs it binds itself to a port
+Port 1-1,023 are well-knows port
+	22 -  SSH
+	25 -  SMTP
+	80 -  HTTP
+	143 - IMAP
+	389 - LDAP
+	443 - HTTPS
+https://www.mybank.com
+==============================================================================
+==============================================================================
+
