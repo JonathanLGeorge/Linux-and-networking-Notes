@@ -1,0 +1,58 @@
+take in computer parts cpu memory network card raid controller 
+
+assembely team 
+testing team 
+OC order copy 
+-all hardware install and software install 
+-firmware (sotware that controlls the hardware)
+
+post software then boot loader
+
+PXE preboot exicution envirment 
+-if a network card supports loaded basic driver... is anything around pxe server..
+-client will send a TTP trivial transfer proto
+will switch over to mac if cant find something 
+
+
+intall OS over network 
+create a ram disk for temp OS
+
+vender
+super mico 
+dell
+ARM servers
+
+what is firmware
+software loaded on to hardware
+instuctiotn to underline hardware
+
+
+CPU mem test 
+if there are hard disk drive - disk test 
+
+
+questions-
+linux 
+-path 
+-how we check for errors look up DMESG grep for error -i (case insesitive)
+what will pip grep -i error
+D
+BMC (boot manager ???)
+
+look up ipnitool
+
+updateing firm ware
+latest security 
+benchmarking test like using max memory for extended period 
+
+
+how would i check for errors in linux  
+
+MCE log 
+corrective layer is when one bit is fliped... the mem we use ECC, if it has one bit fliped we softeare for this 
+
+but if 2 or more are fliped.. we cannot fix that its too ambigious 
+which will shut down a channel and memory will be lost
+
+everything the OS is aware of DMESAG will let me know 
+SCLElist 

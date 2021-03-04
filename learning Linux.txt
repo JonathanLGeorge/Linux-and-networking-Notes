@@ -175,12 +175,105 @@ Symbolic		Octal		tranlation
 -rw-rw----		660		group can modify file but not let other read it 
 -rw-r--r--		644		allows everyone on the system to read the file, only owner can edit it 
 			777		gives everyone full access
+===============================================================================
+===============================================================================
+		The find command
+
+find [path...] [expression]	
+
+-name pattern	finds files and directories that match pattern
+
+-iname pattern	Like -name, but ignores case
+
+-ls		Performs an ls on each os the found items
+
+-mtime days	finds files that are days old
+
+-size num	finds files that are size num
+
+-newer file	finds files that are newer than file
+
+-exec command {} \;
+Run command against all the files that are found
+
+
+example:
+find /bin -iname MAKEDEV 
+===============================================================================
+		A fast find -locate
+locate pattern
+
+lists files that match pattern 
+faster the the find command
+quieres an index
+resultts are not in real time
+may not be enabled in all systems
+===============================================================================
+	Displaying the content of files
+
+cat file		Display the contents of file
+
+more file		browse through a text file
+
+less file		more features than more
+
+head file		output the beginning ot top portion of file
+
+tail file		output the ending or bottom portion of file
+===============================================================================
+		Head and tail
+
+displays only 10 lines be default
+change this behavior with -n
+	n = number of lines
+	tail -15 file.txt
+===============================================================================
+	Viewing files in real time
+tail -f file
+===============================================================================
+		Removing files
+rm file
+rm -r dir	removes the directory and its contents recursiv
+rm -f file 	force removal
+===============================================================================
+		Copying files
+
+cp source_file destination_file
+	copy_file to destination_file
+
+cp src_file1 [src_fileN ...] dest_dir
+	copy source_file to destination_directory
+
+cp -i						interavtive mode
+cp -r source_directory destination		recursive
+===============================================================================
+		Mviong and renaming files
+
+mv	Move or rename files and directories
+
+mv source destination
+
+mv -i source destination
+
+===============================================================================
+		Sorting data
+
+sort file		sort text in file
+
+		sort options
+-k F	sort by key F is the field number
+
+-r 	reverse
+
+-u	sort unique
+
+===============================================================================
+		grep pattern file
 
 
 
-
-
-
+===============================================================================
+===============================================================================
 
 
 
@@ -370,5 +463,79 @@ Port 1-1,023 are well-knows port
 	443 - HTTPS
 https://www.mybank.com
 ==============================================================================
+		ect/services
+Map port names to port numbers
+
+ssh 	22/tcp	# SSH Remote Login Protocol
+smto	25/tcp	# SMTP	
+http	80/tcp	# http
+ldap	389/tcp	# LDAP
+https	443/tcp	# http protocol over TLS/SSL
 ==============================================================================
+		DHCP
+Dynamic Host Configuration Protocol
+DHCP servers assign IP address to DHCP clients
+	IP adress
+	netmask
+	gateway
+	DNS servers
+
+Each Ip is leased from the pool of IP addresses the DHCP server manages
+	the lease expiration is configurable on the DHCP server (1hr, 1day, 1week, ect...)
+The client must renew the lease if it wants to keep using the IP adres. if no renewal is recieved the IP is available to other DHCP clients
+==============================================================================
+	Config a DHCP Client - RHEL
+isconfig -a or ip link
+@3:52 #52
+
+	Config a DHCP Client - ubuntu
+/etc/network.interfaces
+
+auto eth0
+iface eth0 inet dhcp
+==============================================================================
+	Assign a static IP adress - RHEL
+
+/ect/sysconfig/network-scripts/ifcfg-eth0
+
+DEVICE=eth0
+BOOTPROTO=static
+IPADDR=10.108.155.174
+NETMASK=255.255.255.0
+NETWORK=10.108.155.255
+GATEWAY=10.108.155.1
+ONBOOT=yes
+==============================================================================
+		Manually assign an IP adress
+
+Format:
+ip address IP[/NETMASK] dev NETWORK_DEVICE
+
+ip address add 10.11.12.13 dev eth0
+
+ip address add 10.11.12.13/255.255.0 dev eth0
+
+ip link set eth0 up
+
+ifconfig NETWORK_DEVICE addr netmask SUBNET_MASK
+
+ifconfig eth0 10.11.12.13
+ifconfig 10.11.12.13 netmask 255.255.255.0
+ifconfig eth0 up
+==============================================================================
+		ifup / ifdown
+
+Can be used instead of ifconfig / ip
+distribution dependent
+uses configuration files
+examples
+
+ifup eth0
+ifup ennp5s2
+ifdown eth0
+ifdown enp5s2
+==============================================================================
+==============================================================================
+
+
 
