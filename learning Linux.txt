@@ -270,8 +270,156 @@ sort file		sort text in file
 ===============================================================================
 		grep pattern file
 
+grep	display lines matching a pattern
+
+how its used
+grep pattern file
+
+-i	perform a search ignoring case
+-c	count the number of occurrences in a file
+-n	preced output with line numbers
+-v	invert match. print lines that dont match
 
 
+examples
+
+grep bob /ect/passwd | cut -d: -f1,5
+output:
+bobjr:robert d
+bobh:bob hope
+bobs:bob saget
+
+grep bob /ect/passwd | cut -d: -f1,5 | sort |tr ":" " "
+bobbb bob Barker
+bobd bob dylan
+bobdjr robert downy
+bobh bob hope
+bobs bob saget
+
+
+grep bob /ect/passwd | cut -d: -f1,5 | sort |tr ":" " " | column -t
+bobbb	bob	Barker
+bobd	bob	dylan
+bobdjr 	robert 	downy
+bobh 	bob 	hope
+bobs 	bob 	saget
+===============================================================================
+		file command
+
+file file_name 		Display the file type
+
+$file sales.data 
+aes.data: ASCII text
+
+$file *
+bin: directory
+
+===============================================================================
+		searching for text in binary files
+		
+strings		Display printable strings
+
+
+
+lets say we have a file that is not readable by humans
+
+$strings giants-steps.mp3 | grep-i john
+
+output example:
+John Coletrain
+TAG		John Coltrain
+
+===============================================================================
+		Pipes
+|
+
+command-output  command-input
+
+we can chain two commands together with a pipe
+pipe will take the standard output from the preceding command and send its standard input to the  following comand
+if error messages are in the first command they will not be sent
+we need to redirect standard error to standard input if we want those errors refer to i/o redirect
+
+
+common pattern
+
+cat file | grep pattern
+
+
+$strings giants-steps.mp3 | grep-i john | head -1
+
+output example:
+John Coletrain
+===============================================================================
+		The cut command
+		
+cut [file]	cut out selected portions offile. if file is ommited, use standard input
+
+-d delimiter	use delimeter as a field seperator
+-f N		Display the nth field
+
+
+$strings giants-steps.mp3 | grep-i john | head-1 | cut -d' ' -f2
+output example:
+Coletrain
+===============================================================================
+	pipeing output to pager
+more
+less
+
+this controlls the ouput you might see way to much info or maybe you want to see less
+===============================================================================
+===============================================================================
+===============================================================================
+===============================================================================
+		Copying file over the Network
+-SCP 	secure copy
+-SFTP 	SSH file transfer protocol
+
+		command line SCP Clients
+scp
+sftp
+PuTTY secure copy client - pscp.exe
+PuTTY secure File transfer client -psftp.exe
+
+		Graphical SCP/SFTP clients
+cyberduck
+filezilla
+winSCP
+
+		scp/sftp comman line utiles
+		
+scp source destination 
+	copy source to destination
+
+sftp host
+	start a secure file tranfer sessio with host
+sftp jonathan@host
+
+
+		ftp command line utility
+ftp host
+	start a file transfer session with host
+
+example:
+$sftp linuxsvr
+jonathan@192.168.122.60's password:
+connected to linuxsvr
+sftp> pwd
+Remote working directory: /home/jonathan
+sftp> ls
+list of files......
+sftp> lpwd
+Local working directory: /tmp/test
+sftp> lls
+z.txt
+sftp> put z.txt
+uploading z.txt to /home/jonathan/z.txt  (we will then see that file show up on remote server)
+sftp> quit
+===============================================================================
+===============================================================================
+===============================================================================
+===============================================================================
 ===============================================================================
 ===============================================================================
 
