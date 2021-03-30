@@ -538,4 +538,54 @@ ifdown enp5s2
 ==============================================================================
 
 
+======================================================================
+	Environment Variables
+variables are upercase by convention 
+they are name valuepairs
+example: EDITOR=nano
 
+
+viewing Environment variables
+	- printenv
+	- echo $nameOfVariable
+
+creating an Environment Variable 
+	export VAR="value"
+
+you will override existing variables if you do this 
+
+example of changing time zone to us pacific 
+	- export TZ="US/Pacific"
+
+unset VAR
+unset will remove an environment variable 
+
+
+
+========================================================================
+		Listing Processes and information 
+
+ps will display process status
+
+	ps options
+-e	everything, all Processes
+-f 	full formate listing
+-u username		display usersname's precesses
+-p id 			display information for period
+
+
+ps -ef
+ps -eH 			tree
+ps -e --forest  tree
+ps -u username	users process		
+
+you can try these they might not work though 
+
+pstree	display processes in a tree format
+top		interactive processes viewer
+htop	interactive processes viewer
+
+
+========================================================================
+========================================================================
+========================================================================
