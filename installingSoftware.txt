@@ -1,0 +1,16 @@
+                yum  
+    *[this is optional or you need to fill in th blank. do not include the []]
+
+yum search string           search for string
+yum info [package]          display info 
+yum install [-y] package    install package
+yum remove package          remove package
+======================================================================
+                rpm
+
+rpm -qa                 list all installed packages
+rpm -qf /path/to/file   list the files package
+rpm -ql package         list package files
+
+rpm -ivh package.rpm       install package
+rpm -e package              erase(uninstall) package
