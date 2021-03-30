@@ -739,5 +739,25 @@ htop	interactive processes viewer
 
 
 ========================================================================
+				Background and forground processes
+command &	start command in background
+ctrl-C  kill the foreground process 
+ctrl-z  suspern the foreground process
+
+
+bg [%num%]		background a suspended process 
+fg [%num%] 		Foreground a suspended process
+kill 			kill a process by job number or preceding
+jobs [%num%] 	list jobs
+
+		Killing processes
+ctrl-C				kills the forground process
+kill [-sig] pid		send a signal to a process
+kill -l 			Display a list of signals
+
+kill 123
+kill -15 123
+kill -TERM 123		kill -9 123
+
 ========================================================================
 ========================================================================
